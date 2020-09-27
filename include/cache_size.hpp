@@ -72,15 +72,15 @@ std::size_t cache_line_size()
 
     for (i = 0; i != buffer_size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); ++i) 
     {
-		if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == 1)
+	if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == 1)
         {
-			line_size = buffer[i].Cache.LineSize;
-		    break;
-		}
+	    line_size = buffer[i].Cache.LineSize;
+	    break;
 	}
+    }
 
-	free(buffer);
-	return line_size;
+    free(buffer);
+    return line_size;
 }
 
 namespace detail
@@ -98,15 +98,15 @@ std::size_t cache_size(const int level)
 
     for (i = 0; i != buffer_size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); ++i) 
     {
-		if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == level)
+        if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == level)
         {
-			size = buffer[i].Cache.Size;
-		    break;
-		}
+ 	    size = buffer[i].Cache.Size;
+	    break;
 	}
+    }
 
-	free(buffer);
-	return line_size;
+    free(buffer);
+    return line_size;
 }
 }
 
