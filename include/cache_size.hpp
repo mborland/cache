@@ -19,18 +19,23 @@
 
 namespace detail
 {
-std::size_t size(const std::string& name)
+inline std::size_t size(const std::string& name)
 {
     std::size_t size {};
     std::size_t size_of_size {sizeof(size)};
-    sysctlbyname(name, &size, &size_of_size, 0, 0);
+    sysctlbyname(name.c_str(), &size, &size_of_size, 0, 0);
     return size;
 }
 }
 
-std::size_t cache_line_size()
+inline std::size_t cache_line_size()
 {
     return detail::size("hw.cachelinesize");
+}
+
+inline std::size_t L1I_cache_size()
+{
+    return detail::size("hw.l1icachesize");
 }
 
 inline std::size_t L1D_cache_size()
@@ -38,9 +43,14 @@ inline std::size_t L1D_cache_size()
     return detail::size("hw.l1dcachesize");
 }
 
-std::size_t L2_cache_size()
+inline std::size_t L2_cache_size()
 {
     return detail::size("hw.l2cachesize");
+}
+
+inline std::size_t L3_cache_size()
+{
+    return detail::size("hw.l3cachesize");
 }
 
 // https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-system_logical_processor_information
