@@ -136,33 +136,33 @@ inline std::size_t L3_cache_size()
 
 #include <unistd.h>
 
-inline std::size_t cache_line_size()
+inline std::size_t cache_line_size() noexcept
 {
     return static_cast<std::size_t>(sysconf(_SC_LEVEL1_DCACHE_LINESIZE));
 }
 
-inline std::size_t L1I_cache_size()
+inline std::size_t L1I_cache_size() noexcept
 {
     return static_cast<std::size_t>(sysconf(_SC_LEVEL1_ICACHE_SIZE));
 }
 
-inline std::size_t L1D_cache_size()
+inline std::size_t L1D_cache_size() noexcept
 {
     return static_cast<std::size_t>(sysconf(_SC_LEVEL1_DCACHE_SIZE));
 }
 
-inline std::size_t L2_cache_size()
+inline std::size_t L2_cache_size() noexcept
 {
     return static_cast<std::size_t>(sysconf(_SC_LEVEL2_CACHE_SIZE));
 }
 
-inline std::size_t L3_cache_size()
+inline std::size_t L3_cache_size() noexcept
 {
     return static_cast<std::size_t>(sysconf(_SC_LEVEL3_CACHE_SIZE));
 }
 
 // Used for POWER arch
-inline std::size_t L4_cache_size()
+inline std::size_t L4_cache_size() noexcept
 {
     return static_cast<std::size_t>(sysconf(_SC_LEVEL4_CACHE_SIZE));
 }
