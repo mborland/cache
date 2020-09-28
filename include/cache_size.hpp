@@ -72,11 +72,11 @@ std::size_t cache_line_size()
 
     for (i = 0; i != buffer_size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); ++i) 
     {
-	if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == 1)
+	    if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == 1)
         {
-	    line_size = buffer[i].Cache.LineSize;
-	    break;
-	}
+	        line_size = buffer[i].Cache.LineSize;
+	        break;
+	    }
     }
 
     free(buffer);
@@ -100,9 +100,9 @@ std::size_t cache_size(const int level)
     {
         if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == level)
         {
- 	    size = buffer[i].Cache.Size;
-	    break;
-	}
+ 	        size = buffer[i].Cache.Size;
+	        break;
+	    }
     }
 
     free(buffer);
@@ -110,7 +110,13 @@ std::size_t cache_size(const int level)
 }
 }
 
-inline std::size_t L1_cache_size()
+// Windows does not offer a method of differentiating L1I and L1D
+inline std::size_t L1I_cache_size()
+{
+    return detail::cache_size(1);
+}
+
+inline std::size_t L1D_cache_size()
 {
     return detail::cache_size(1);
 }
